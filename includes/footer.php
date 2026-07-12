@@ -1,7 +1,7 @@
 </main>
     <footer>
         <div class="container" style="text-align: center; margin-top: 50px; color: #777;">
-            <p>&copy; <?php echo date("Y"); ?> Sistem Dokumentasi Keuangan Kas</p>
+            <p>&copy; <?php echo date("Y"); ?> Website KasKeuangan Khresmupu</p>
         </div>
     </footer>
     

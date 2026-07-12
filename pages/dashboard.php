@@ -676,11 +676,11 @@ $saldo_saat_ini = $saldo_awal_map;
         <?php endforeach; ?>
     </div>
 <?php endif; ?>
-<div class="overview-riwayat-box" style="display: flex; justify-content: space-between; align-items: center; background: #fdfefe; padding: 15px 20px; border: 1px solid #e5e8e8; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+<div class="overview-riwayat-box">
     <div>
-        <h3 style="margin: 0; color: #2c3e50; font-size: 16px;">Lihat untuk lebih lengkap untuk melihat dan mengedit Riwayat keseluruhan</h3>
+        <h3>Lihat untuk lebih lengkap untuk melihat dan mengedit Riwayat keseluruhan</h3>
     </div>
-    <a href="riwayat_lengkap.php" style="background: #2c3e50; color: #fff; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; transition: background 0.2s;">
+    <a href="riwayat_lengkap.php">
         Lihat Selengkapnya &rarr;
     </a>
 </div>

@@ -45,7 +45,7 @@ $res_transaksi = mysqli_query($conn, $query);
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Laporan Transaksi</title>
+    <title>KasKeuangan Khresmupu</title>
     <style>
         body { font-family: sans-serif; font-size: 11px; }
         table { width: 100%; border-collapse: collapse; }

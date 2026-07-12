@@ -96,7 +96,6 @@ while ($row = mysqli_fetch_assoc($query_transaksi)) {
     $semua_transaksi[] = $row;
 }
 
-// Tentukan daftar akun yang akan ditampilkan di kolom tabel (Jika difilter 1 akun, saring array-nya)
 $tampil_akun = $daftar_akun;
 if ($filter_akun_id > 0) {
     $tampil_akun = array_filter($daftar_akun, function($a) use ($filter_akun_id) {
@@ -109,7 +108,8 @@ if ($filter_akun_id > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semua Riwayat Transaksi - Aplikasi Keuangan Kas</title>
+    <title>KasKeuangan Khresmupu</title>
+    <link rel="icon" type="image/png" href="<?php echo $base_url; ?>includes/KasKeuanganKhresmupu.png">
     <style>
         * {
             margin: 0;
@@ -149,6 +149,7 @@ if ($filter_akun_id > 0) {
             overflow-x: auto;
             max-width: 100%;
             margin-bottom: 20px;
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling di iOS */
         }
         table {
             width: 100%;
@@ -195,15 +196,50 @@ if ($filter_akun_id > 0) {
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             margin-top: 10px;
         }
+
+        /* =========================================
+           RESPONSIF UNTUK HP (Layar <= 768px)
+           ========================================= */
         @media screen and (max-width: 768px) {
-            .container { width: 100%; padding: 10px; }
-            table th, table td { padding: 8px; font-size: 13px; }
+            .container { 
+                width: 100%; 
+                padding: 10px; 
+            }
+            .header-flex {
+                flex-direction: column;
+                align-items: flex-start !important;
+                gap: 10px;
+            }
+            .filter-box form {
+                flex-direction: column;
+                align-items: stretch !important;
+            }
+            .filter-box form > div {
+                width: 100%;
+            }
+            .filter-box button, .filter-box a {
+                width: 100%;
+                text-align: center;
+            }
+            table th, table td { 
+                padding: 8px; 
+                font-size: 13px; 
+            }
+            #calculator-box {
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+                text-align: center;
+                border-radius: 12px !important;
+                padding: 12px 15px !important;
+                font-size: 12px;
+            }
         }
     </style>
 </head>
 <body>
     <main class="container">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <div class="header-flex" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
             <h2>Semua Riwayat Transaksi</h2>
             <a href="dashboard.php" style="background: #2c3e50; color: #fff; padding: 6px 14px; border-radius: 4px; text-decoration: none; font-size: 13px;">&larr; Kembali ke Dashboard</a>
         </div>
