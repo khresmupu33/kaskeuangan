@@ -335,11 +335,26 @@ $query_transaksi = mysqli_query($conn, $sql_transaksi);
 while ($row = mysqli_fetch_assoc($query_transaksi)) {
     $semua_transaksi[] = $row;
 }
+
+$current_user_id = $_SESSION['user_id'] ?? null;
+
+if ($current_user_id) {
+    $stmt = $conn->prepare("SELECT username FROM users WHERE id = ?");
+    $stmt->bind_param("i", $current_user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+    
+    // Mengganti variabel menjadi $manggil_user
+    $manggil_user = $user ? $user['username'] : 'Tamu';
+} else {
+    $manggil_user = 'Tamu';
+}
 ?>
 <div class="welcome-section" style="margin-bottom: 20px;">
     <h1>Dashboard Keuangan</h1>
     <p style="color: #555; font-size: 16px;">
-        Selamat datang kembali, <strong style="color: #2c3e50;"><?= htmlspecialchars(ucfirst($username)); ?></strong>! Berikut ringkasan aktivitas keuangan Anda hari ini.
+        Selamat datang kembali, <strong style="color: #2c3e50;"><?= htmlspecialchars(ucfirst($manggil_user)); ?></strong>! Berikut ringkasan aktivitas keuangan Anda hari ini.
     </p>
 </div>
 <div class="dashboard-cards dashboard-scroll">

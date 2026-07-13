@@ -205,9 +205,6 @@ if ($filter_akun_id > 0) {
             margin-top: 10px;
         }
 
-        /* =========================================
-            RESPONSIF UNTUK HP (Layar <= 768px)
-            ========================================= */
         @media screen and (max-width: 768px) {
             .container { 
                 width: 100%; 
@@ -243,7 +240,6 @@ if ($filter_akun_id > 0) {
                 font-size: 12px;
             }
         }
-        /* Overlay & Lingkaran Loading Spinner (Benar-benar di paling depan) */
         #page-loader {
             position: fixed;
             top: 0;
@@ -259,12 +255,10 @@ if ($filter_akun_id > 0) {
             pointer-events: none;
             transition: opacity 0.4s ease-in-out;
         }
-
         #page-loader.show {
             opacity: 1;
             pointer-events: auto;
         }
-
         .spinner {
             width: 50px;
             height: 50px;
@@ -275,7 +269,6 @@ if ($filter_akun_id > 0) {
             position: relative;
             z-index: 2147483647;
         }
-
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -331,10 +324,18 @@ if ($filter_akun_id > 0) {
                 <button type="submit" style="padding: 8px 15px; cursor: pointer; background: #2c3e50; color: white; border: none; border-radius: 4px;">Filter</button>
                 <a href="riwayat_lengkap.php" style="padding: 8px 15px; background: #eee; text-decoration: none; color: #333; border-radius: 4px; display: inline-block;">Reset</a>
             </form>
-            <a href="transaksi/cetak_laporan.php?<?php echo http_build_query($_GET); ?>"  
-               style="padding: 8px 15px; background: #2c3e50; color: white; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 12px;">
-                Cetak PDF
-            </a>
+            
+            <div style="display: flex; gap: 10px; margin-top: 12px;">
+                <a href="transaksi/cetak_laporan.php?<?php echo http_build_query($_GET); ?>"  
+                   style="padding: 8px 15px; background: #2c3e50; color: white; text-decoration: none; border-radius: 4px; display: inline-block;">
+                    Cetak PDF
+                </a>
+                
+                <a href="transaksi/cetak_excel.php?<?php echo http_build_query($_GET); ?>" 
+                   style="padding: 8px 15px; background: #2c3e50; color: white; text-decoration: none; border-radius: 4px; display: inline-block;">
+                    Cetak ke Excel
+                </a>
+            </div>
         </div>
 
         <?php
@@ -609,7 +610,6 @@ if ($filter_akun_id > 0) {
         });
     }
 
-    // Hilangkan loader dan jalankan fade-in saat halaman selesai dimuat
     window.addEventListener('DOMContentLoaded', () => {
         const loader = document.getElementById('page-loader');
         document.body.classList.add('fade-in');
@@ -618,7 +618,6 @@ if ($filter_akun_id > 0) {
         }, 50);
     });
 
-    // Tampilkan loader dan jalankan fade-out saat pindah halaman
     document.addEventListener('click', (e) => {
         const link = e.target.closest('a');
         if (link && link.href && !link.href.startsWith('#') && link.target !== '_blank' && !link.hasAttribute('onclick')) {
