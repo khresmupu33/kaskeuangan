@@ -19,31 +19,27 @@
         color: #333;
         line-height: 1.6;
         padding-top: 90px;
-        /* Ruang aman agar konten tidak tertutup fixed header di atas (Desktop) */
         padding-bottom: 70px;
-        /* Ruang aman agar konten tidak tertutup bottom tab bar di HP */
     }
 
-    /* Overlay Paling Depan Menutup Segala Layar Putih */
+    /* Overlay Halaman / Loader */
     #page-loader {
         position: fixed;
         top: 0;
         left: 0;
         width: 100vw;
         height: 100vh;
-        background: #f4f7f6;
-        /* Gunakan warna background halaman agar menyatu, atau #ffffff untuk putih total */
+        background: rgba(244, 247, 246, 0.85);
+        backdrop-filter: blur(4px);
         display: flex;
         justify-content: center;
         align-items: center;
         z-index: 21474;
-        /* Nilai z-index maksimum di browser */
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.4s ease-in-out;
+        transition: opacity 0.3s ease-in-out;
     }
 
-    /* Saat aktif, pastikan mutlak menutupi semua elemen lain */
     #page-loader.show {
         opacity: 1;
         pointer-events: auto;
@@ -52,23 +48,17 @@
     .spinner {
         width: 50px;
         height: 50px;
-        border: 5px solid rgba(44, 62, 80, 0.15);
-        border-top: 5px solid #2c3e50;
-        /* Warna lingkaran loading #2c3e50 */
+        border: 4px solid rgba(44, 62, 80, 0.1);
+        border-top: 4px solid #2c3e50;
         border-radius: 50%;
-        animation: spin 0.8s linear infinite;
+        animation: spin 0.7s cubic-bezier(0.5, 0.1, 0.4, 0.9) infinite;
         position: relative;
         z-index: 2147483647;
     }
 
     @keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
-
-        100% {
-            transform: rotate(360deg);
-        }
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
     }
 
     /* Layout Container */
@@ -76,23 +66,28 @@
         width: 90%;
         max-width: 1200px;
         margin: 0 auto;
-        padding: 20px;
+        padding: 24px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
     }
 
     /* Navbar Fixed di Atas */
     header {
         background: #2c3e50;
         color: #fff;
-        padding: 1rem 0;
+        padding: 0.75rem 0;
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         z-index: 1000;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
     header nav {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -102,37 +97,44 @@
     .nav-brand {
         display: flex;
         align-items: center;
-        gap: 10px;
-        font-size: 1.2rem;
-        font-weight: bold;
+        gap: 12px;
+        font-size: 1.15rem;
+        font-weight: 600;
+        letter-spacing: 0.3px;
         color: #fff;
         text-decoration: none;
+        transition: opacity 0.2s;
     }
 
-    /* Styling Gambar Logo Bulet di Navbar */
+    .nav-brand:hover {
+        opacity: 0.9;
+    }
+
+    /* Styling Gambar Logo Bulat di Navbar */
     .nav-brand img {
-        width: 38px;
-        height: 38px;
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
         object-fit: cover;
-        border: 2px solid rgba(255, 255, 255, 0.8);
+        border: 2px solid rgba(255, 255, 255, 0.85);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
     header nav ul {
         list-style: none;
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
     }
 
     header nav ul li a,
     header nav ul li .drop-btn {
-        color: #fff;
+        color: rgba(255, 255, 255, 0.85);
         text-decoration: none;
-        font-weight: bold;
-        padding: 8px 12px;
-        border-radius: 4px;
-        transition: background 0.2s;
+        font-weight: 500;
+        padding: 8px 14px;
+        border-radius: 6px;
+        transition: all 0.2s ease;
         display: block;
         background: transparent;
         border: none;
@@ -143,10 +145,10 @@
 
     header nav ul li a:hover,
     header nav ul li .drop-btn:hover {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.12);
+        color: #fff;
     }
 
-    /* Sembunyikan ikon khusus mobile di mode desktop */
     .mobile-icon {
         display: none;
     }
@@ -159,16 +161,22 @@
     .dropdown-content {
         display: none;
         position: absolute;
-        top: 100%;
+        top: calc(100% + 6px);
         left: 0;
         background: #34495e;
-        min-width: 200px;
-        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-        border-radius: 4px;
+        min-width: 210px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        border-radius: 8px;
         list-style: none;
         flex-direction: column;
-        padding: 5px 0;
+        padding: 6px;
         z-index: 100;
+        animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-5px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
     .dropdown-content li {
@@ -176,157 +184,218 @@
     }
 
     .dropdown-content li a {
-        padding: 10px 15px;
+        padding: 10px 14px;
         font-size: 14px;
-        border-radius: 0;
-        color: #fff;
+        border-radius: 6px;
+        color: rgba(255, 255, 255, 0.85);
         text-align: left;
     }
 
     .dropdown-content li a:hover {
         background: rgba(255, 255, 255, 0.1);
+        color: #fff;
     }
 
-    /* Tampilkan dropdown saat aktif via JS */
     .dropdown.active .dropdown-content {
         display: flex;
     }
 
-    /* Tombol Hamburger 3 Bar disembunyikan total */
     .hamburger {
         display: none;
     }
 
+    /* Tabel Styling Modern */
     .table-wrap {
         overflow-x: auto;
         max-width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 0 0 1px #eee;
+        margin-top: 15px;
     }
 
-    /* Tabel Styling */
     table {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 10px;
         background: #fff;
+        text-align: left;
     }
 
     table th,
     table td {
-        border: 1px solid #ddd;
-        padding: 10px;
-        text-align: left;
-        vertical-align: top;
+        border-bottom: 1px solid #edf2f7;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        padding: 12px 16px;
+        vertical-align: middle;
         white-space: nowrap;
+        font-size: 14px;
     }
 
     table th {
         background-color: #2c3e50;
         color: white;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+    }
+
+    table tbody tr {
+        transition: background-color 0.15s ease;
+    }
+
+    table tbody tr:hover {
+        background-color: #f8fafc;
     }
 
     /* Form Styling */
     .form-group {
-        margin-bottom: 15px;
+        margin-bottom: 18px;
     }
 
     label {
         display: block;
-        margin-bottom: 5px;
+        margin-bottom: 6px;
+        font-weight: 500;
+        font-size: 14px;
+        color: #2c3e50;
     }
 
     input,
     select,
     textarea {
         width: 100%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
+        padding: 10px 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        font-family: inherit;
+        font-size: 14px;
+        transition: all 0.2s;
+        background: #fff;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+        outline: none;
+        border-color: #2c3e50;
+        box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.12);
     }
 
     button {
         background: #27ae60;
         color: white;
-        padding: 10px 15px;
+        padding: 10px 20px;
         border: none;
-        border-radius: 4px;
+        border-radius: 6px;
         cursor: pointer;
+        font-weight: 600;
+        font-size: 14px;
+        transition: background 0.2s, transform 0.1s;
     }
 
     button:hover {
         background: #219150;
     }
 
+    button:active {
+        transform: scale(0.98);
+    }
+
+    /* Dashboard Cards */
     .dashboard-cards {
         display: flex;
-        gap: 15px;
-        margin-bottom: 20px;
+        gap: 16px;
+        margin-bottom: 24px;
         flex-wrap: wrap;
     }
 
     .info-card {
-        border: 1px solid #ddd;
-        padding: 15px;
-        border-radius: 10px;
-        min-width: 200px;
+        border: 1px solid #e2e8f0;
+        padding: 20px;
+        border-radius: 12px;
+        min-width: 220px;
         background: #fff;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .info-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
     }
 
     .info-card.total {
-        border: 2px solid #333;
-        background: #f5f5f5;
+        border: 2px solid #2c3e50;
+        background: #f8fafc;
     }
 
     .info-card h3,
     .info-card h4 {
-        margin: 0 0 10px 0;
+        margin: 0 0 8px 0;
+        color: #2c3e50;
     }
 
     .info-card p {
-        margin: 5px 0;
+        margin: 4px 0;
+        color: #4a5568;
     }
 
     .target-wrapper {
         display: flex;
-        gap: 15px;
+        gap: 16px;
         margin-bottom: 30px;
         overflow-x: auto;
-        padding-bottom: 10px;
+        padding-bottom: 12px;
+    }
+
+    .target-wrapper::-webkit-scrollbar {
+        height: 6px;
+    }
+    .target-wrapper::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 3px;
     }
 
     .target-card {
-        border: 1px solid #ddd;
-        padding: 15px;
-        border-radius: 10px;
+        border: 1px solid #e2e8f0;
+        padding: 18px;
+        border-radius: 12px;
         width: 280px;
         flex-shrink: 0;
         background: #fff;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        transition: transform 0.2s ease;
+    }
+
+    .target-card:hover {
+        transform: translateY(-2px);
     }
 
     .target-card.over {
-        border-color: #ff4d4d;
-        background: #fff1f1;
+        border-color: #feb2b2;
+        background: #fff5f5;
     }
 
     .target-card.normal {
-        border-color: #bfe8d7;
+        border-color: #cbd5e1;
         background: #2c3e50;
         color: #fff;
     }
 
     .progress-box {
         width: 100%;
-        height: 12px;
-        background: #e0e0e0;
+        height: 10px;
+        background: rgba(0,0,0,0.08);
         border-radius: 999px;
         overflow: hidden;
-        margin: 8px 0 10px 0;
+        margin: 10px 0 12px 0;
     }
 
     .progress-bar {
         height: 100%;
         background: #27ae60;
+        border-radius: 999px;
+        transition: width 0.4s ease;
     }
 
     .progress-bar.over {
@@ -335,23 +404,24 @@
 
     .small-text {
         font-size: 0.85em;
-        color: #fff;
+        opacity: 0.9;
     }
 
     .warning-text {
-        color: #d63031;
-        font-weight: bold;
+        color: #e74c3c;
+        font-weight: 600;
         font-size: 0.9em;
     }
 
     .edit-cell {
-        background: #fff8dc;
+        background: #fffdf5;
         outline: none;
         cursor: pointer;
+        transition: background 0.2s;
     }
 
     .edit-cell:hover {
-        background: #fff1b8;
+        background: #fffbeb;
     }
 
     .inline-input,
@@ -359,53 +429,53 @@
         width: 100%;
         min-width: 120px;
         box-sizing: border-box;
-        padding: 6px 8px;
-        border: 1px solid #999;
+        padding: 6px 10px;
+        border: 1px solid #2c3e50;
         border-radius: 6px;
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .locked-text {
-        color: #bbb;
+        color: #a0aec0;
     }
 
-    .cell-saving {
-        background: #dff9fb !important;
-    }
+    .cell-saving { background: #e0f2fe !important; }
+    .cell-success { background: #dcfce7 !important; }
+    .cell-error { background: #fee2e2 !important; }
 
-    .cell-success {
-        background: #c7f7d4 !important;
-    }
-
-    .cell-error {
-        background: #ffd6d6 !important;
-    }
-
-    /* Mengatur kotak card agar bisa scroll Y dengan max-height di Desktop */
     .dashboard-cards.dashboard-scroll {
-        max-height: 250px;
+        max-height: 260px;
         overflow-y: auto;
         overflow-x: hidden;
-        padding-right: 5px;
+        padding-right: 6px;
     }
 
-    /* Styling Utama Overview Riwayat */
+    .dashboard-cards.dashboard-scroll::-webkit-scrollbar {
+        width: 6px;
+    }
+    .dashboard-cards.dashboard-scroll::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 3px;
+    }
+
+    /* Overview Riwayat */
     .overview-riwayat-box {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: #fdfefe;
-        padding: 15px 20px;
-        border: 1px solid #e5e8e8;
-        border-radius: 8px;
-        margin-bottom: 15px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        background: #f8fafc;
+        padding: 16px 20px;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
     }
 
     .overview-riwayat-box h3 {
         margin: 0;
         color: #2c3e50;
-        font-size: 16px;
+        font-size: 15px;
+        font-weight: 600;
     }
 
     .overview-riwayat-box a {
@@ -415,7 +485,7 @@
         border-radius: 6px;
         text-decoration: none;
         font-size: 13px;
-        font-weight: 600;
+        font-weight: 500;
         display: inline-flex;
         align-items: center;
         gap: 6px;
@@ -428,17 +498,18 @@
     }
 
     /* =========================================
-   MEDIA QUERY & BOTTOM TAB BAR UNTUK HP (<= 768px)
-   ========================================= */
+       MEDIA QUERY & BOTTOM TAB BAR UNTUK HP (<= 768px)
+       ========================================= */
     @media screen and (max-width: 768px) {
         body {
-            padding-top: 85px;
-            /* Jarak aman atas di mobile agar konten tidak mepet/ketimpa */
+            padding-top: 75px;
+            padding-bottom: 80px;
         }
 
         .container {
-            width: 100%;
-            padding: 12px;
+            width: 95%;
+            padding: 14px;
+            border-radius: 10px;
         }
 
         /* Sembunyikan default menu desktop header */
@@ -457,11 +528,12 @@
             flex-direction: row;
             justify-content: space-around;
             align-items: center;
-            height: 60px;
+            height: 65px;
             margin: 0;
-            padding: 0;
+            padding: 0 4px;
             border-radius: 0;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
             z-index: 9999;
         }
 
@@ -476,20 +548,27 @@
         header nav ul#nav-menu li a,
         header nav ul#nav-menu li .drop-btn {
             padding: 6px 2px;
-            font-size: 10px;
+            font-size: 11px;
             width: 100%;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 2px;
+            gap: 3px;
+            color: rgba(255, 255, 255, 0.9);
+            border-radius: 0;
+        }
+
+        header nav ul#nav-menu li a:hover,
+        header nav ul#nav-menu li .drop-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
             color: #fff;
         }
 
         .mobile-icon {
             display: block;
-            font-size: 18px;
+            font-size: 19px;
             line-height: 1;
         }
 
@@ -500,22 +579,22 @@
 
         .dropdown-content {
             position: fixed !important;
-            bottom: 60px !important;
+            bottom: 65px !important;
             left: 50% !important;
             transform: translateX(-50%) !important;
             top: auto !important;
-            width: 90% !important;
-            max-width: 320px;
+            width: 92% !important;
+            max-width: 340px;
             background: #34495e !important;
-            border-radius: 10px 10px 0 0 !important;
-            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3) !important;
+            border-radius: 12px 12px 0 0 !important;
+            box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.25) !important;
             padding: 8px 0 !important;
             z-index: 10000 !important;
         }
 
         .dropdown-content li {
             width: 100%;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .dropdown-content li:last-child {
@@ -523,8 +602,8 @@
         }
 
         .dropdown-content li a {
-            padding: 12px 15px !important;
-            font-size: 13px !important;
+            padding: 12px 16px !important;
+            font-size: 13.5px !important;
             text-align: center !important;
             justify-content: center !important;
             display: flex !important;
@@ -532,6 +611,7 @@
 
         .dashboard-cards {
             flex-direction: column;
+            gap: 12px;
         }
 
         .info-card {
@@ -540,12 +620,12 @@
 
         table th,
         table td {
-            padding: 8px;
+            padding: 10px 12px;
             font-size: 13px;
         }
 
         .dashboard-cards.dashboard-scroll {
-            max-height: 220px;
+            max-height: 240px;
             flex-direction: column;
             flex-wrap: nowrap;
         }
@@ -557,14 +637,14 @@
 
         .overview-riwayat-box {
             flex-direction: column;
-            align-items: flex-start;
+            align-items: stretch;
             gap: 12px;
-            padding: 12px 15px;
+            padding: 14px;
+            text-align: center;
         }
 
         .overview-riwayat-box h3 {
             font-size: 14px;
-            line-height: 1.4;
         }
 
         .overview-riwayat-box a {
@@ -573,7 +653,7 @@
             padding: 10px 16px;
         }
     }
-    </style>
+</style>
 </head>
 
 <body>

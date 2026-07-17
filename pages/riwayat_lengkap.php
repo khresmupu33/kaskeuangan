@@ -111,7 +111,7 @@ if ($filter_akun_id > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KasKeuangan Khresmupu</title>
     <link rel="icon" type="image/png" href="<?php echo $base_url; ?>includes/KasKeuanganKhresmupu.png">
-    <style>
+   <style>
     * {
         margin: 0;
         padding: 0;
@@ -123,8 +123,11 @@ if ($filter_akun_id > 0) {
         background-color: #f4f7f6;
         color: #333;
         line-height: 1.6;
+        padding-top: 90px;
+        padding-bottom: 70px;
     }
 
+    /* Layout Container */
     .container {
         width: 95%;
         max-width: 100%;
@@ -132,6 +135,125 @@ if ($filter_akun_id > 0) {
         padding: 20px;
     }
 
+    /* Navbar Fixed di Atas */
+    header {
+        background: #2c3e50;
+        color: #fff;
+        padding: 1rem 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    header nav {
+        width: 95%;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* Logo / Judul Brand di Navbar */
+    .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    /* Styling Gambar Logo Bulat di Navbar */
+    .nav-brand img {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid rgba(255, 255, 255, 0.8);
+    }
+
+    header nav ul {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    header nav ul li a,
+    header nav ul li .drop-btn {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 8px 12px;
+        border-radius: 4px;
+        transition: background 0.2s;
+        display: block;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 14px;
+    }
+
+    header nav ul li a:hover,
+    header nav ul li .drop-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .mobile-icon {
+        display: none;
+    }
+
+    /* Dropdown Container */
+    .dropdown {
+        position: relative;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #34495e;
+        min-width: 200px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        border-radius: 4px;
+        list-style: none;
+        flex-direction: column;
+        padding: 5px 0;
+        z-index: 100;
+    }
+
+    .dropdown-content li {
+        width: 100%;
+    }
+
+    .dropdown-content li a {
+        padding: 10px 15px;
+        font-size: 14px;
+        border-radius: 0;
+        color: #fff;
+        text-align: left;
+    }
+
+    .dropdown-content li a:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .dropdown.active .dropdown-content {
+        display: flex;
+    }
+
+    .hamburger {
+        display: none;
+    }
+
+    /* Month Group & Section Title */
     .month-group-container {
         margin-bottom: 30px;
     }
@@ -150,6 +272,7 @@ if ($filter_akun_id > 0) {
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     }
 
+    /* Table & Scroll Wrap */
     .table-wrap {
         overflow: auto;
         max-height: 65vh;
@@ -186,6 +309,38 @@ if ($filter_akun_id > 0) {
         text-align: left;
         vertical-align: top;
         white-space: nowrap;
+    }
+
+    /* Form & Inline Inputs */
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button {
+        background: #27ae60;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #219150;
     }
 
     .inline-input,
@@ -230,50 +385,7 @@ if ($filter_akun_id > 0) {
         margin-top: 10px;
     }
 
-    @media screen and (max-width: 768px) {
-        .container {
-            width: 100%;
-            padding: 10px;
-        }
-
-        .header-flex {
-            flex-direction: column;
-            align-items: flex-start !important;
-            gap: 10px;
-        }
-
-        .filter-box form {
-            flex-direction: column;
-            align-items: stretch !important;
-        }
-
-        .filter-box form>div {
-            width: 100%;
-        }
-
-        .filter-box button,
-        .filter-box a {
-            width: 100%;
-            text-align: center;
-        }
-
-        table th,
-        table td {
-            padding: 8px;
-            font-size: 13px;
-        }
-
-        #calculator-box {
-            left: 10px;
-            right: 10px;
-            bottom: 10px;
-            text-align: center;
-            border-radius: 12px !important;
-            padding: 12px 15px !important;
-            font-size: 12px;
-        }
-    }
-
+    /* Page Loader */
     #page-loader {
         position: fixed;
         top: 0;
@@ -310,12 +422,152 @@ if ($filter_akun_id > 0) {
         0% {
             transform: rotate(0deg);
         }
-
         100% {
             transform: rotate(360deg);
         }
     }
-    </style>
+
+    /* =========================================
+       MEDIA QUERY & BOTTOM TAB BAR UNTUK HP (<= 768px)
+       ========================================= */
+    @media screen and (max-width: 768px) {
+        body {
+            padding-top: 85px;
+            padding-bottom: 70px;
+        }
+
+        .container {
+            width: 100%;
+            padding: 10px;
+        }
+
+        .header-flex {
+            flex-direction: column;
+            align-items: flex-start !important;
+            gap: 10px;
+        }
+
+        .filter-box form {
+            flex-direction: column;
+            align-items: stretch !important;
+        }
+
+        .filter-box form > div {
+            width: 100%;
+        }
+
+        .filter-box button,
+        .filter-box a {
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Sembunyikan default menu desktop header */
+        header nav ul {
+            display: none !important;
+        }
+
+        /* Ubah navigasi bawah menjadi Bottom Tab Bar Fixed */
+        header nav ul#nav-menu {
+            display: flex !important;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #2c3e50;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            height: 60px;
+            margin: 0;
+            padding: 0;
+            border-radius: 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 9999;
+        }
+
+        header nav ul#nav-menu li {
+            width: auto;
+            border: none;
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        header nav ul#nav-menu li a,
+        header nav ul#nav-menu li .drop-btn {
+            padding: 6px 2px;
+            font-size: 10px;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            color: #fff;
+        }
+
+        .mobile-icon {
+            display: block;
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        /* Dropdown di HP diubah menjadi Dropup (muncul ke atas dari Tab Bar) */
+        .dropdown.active .dropdown-content {
+            display: flex !important;
+        }
+
+        .dropdown-content {
+            position: fixed !important;
+            bottom: 60px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            top: auto !important;
+            width: 90% !important;
+            max-width: 320px;
+            background: #34495e !important;
+            border-radius: 10px 10px 0 0 !important;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3) !important;
+            padding: 8px 0 !important;
+            z-index: 10000 !important;
+        }
+
+        .dropdown-content li {
+            width: 100%;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .dropdown-content li:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content li a {
+            padding: 12px 15px !important;
+            font-size: 13px !important;
+            text-align: center !important;
+            justify-content: center !important;
+            display: flex !important;
+        }
+
+        table th,
+        table td {
+            padding: 8px;
+            font-size: 13px;
+        }
+
+        #calculator-box {
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            text-align: center;
+            border-radius: 12px !important;
+            padding: 12px 15px !important;
+            font-size: 12px;
+        }
+    }
+</style>
 </head>
 
 <body>
